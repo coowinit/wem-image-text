@@ -1,0 +1,98 @@
+/* WEM Image Text editor canvas: match front-end spacing behavior. */
+.editor-styles-wrapper .wp-block-wem-image-text.wem-image-text {
+    display: grid;
+    grid-template-columns: minmax(0, var(--wem-it-image-width, 50%)) minmax(0, calc(100% - var(--wem-it-image-width, 50%) - var(--wem-it-gap, 24px)));
+    grid-template-areas: "media content";
+    align-items: center;
+    gap: var(--wem-it-gap, 24px);
+    min-width: 0;
+}
+.editor-styles-wrapper .wp-block-wem-image-text.wem-image-text--desktop-image-left {
+    grid-template-areas: "media content";
+    grid-template-columns: minmax(0, var(--wem-it-image-width, 50%)) minmax(0, calc(100% - var(--wem-it-image-width, 50%) - var(--wem-it-gap, 24px)));
+}
+.editor-styles-wrapper .wp-block-wem-image-text.wem-image-text--desktop-image-right {
+    grid-template-areas: "content media";
+    grid-template-columns: minmax(0, calc(100% - var(--wem-it-image-width, 50%) - var(--wem-it-gap, 24px))) minmax(0, var(--wem-it-image-width, 50%));
+}
+.editor-styles-wrapper .wp-block-wem-image-text.wem-image-text--desktop-image-top {
+    grid-template-areas: "media" "content";
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+}
+.editor-styles-wrapper .wp-block-wem-image-text.wem-image-text--desktop-image-bottom {
+    grid-template-areas: "content" "media";
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+}
+.editor-styles-wrapper .wp-block-wem-image-text > .block-editor-inner-blocks,
+.editor-styles-wrapper .wp-block-wem-image-text > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    display: contents;
+}
+.editor-styles-wrapper .wp-block-wem-image-text > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block:nth-child(1) {
+    grid-area: media;
+    min-width: 0;
+    width: 100%;
+    margin-block: 0 !important;
+}
+.editor-styles-wrapper .wp-block-wem-image-text > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block:nth-child(2) {
+    grid-area: content;
+    min-width: 0;
+    width: 100%;
+    margin-block: 0 !important;
+}
+.editor-styles-wrapper .wp-block-wem-image-text .wp-block-wem-image-text-media,
+.editor-styles-wrapper .wp-block-wem-image-text .wp-block-wem-image-text-content,
+.editor-styles-wrapper .wp-block-wem-image-text .wem-image-text__media,
+.editor-styles-wrapper .wp-block-wem-image-text .wem-image-text__content {
+    min-width: 0;
+    width: 100%;
+    margin-block: 0;
+    padding: 0;
+}
+.editor-styles-wrapper .wp-block-wem-image-text-media .wp-block-image {
+    display: block;
+    width: 100%;
+    margin: 0 !important;
+}
+.editor-styles-wrapper .wp-block-wem-image-text-media .wp-block-image img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--wem-it-radius, 0);
+}
+.editor-styles-wrapper .wp-block-wem-image-text-content.wem-image-text__content > :first-child { margin-block-start: 0; }
+.editor-styles-wrapper .wp-block-wem-image-text-content.wem-image-text__content > :last-child { margin-block-end: 0; }
+
+@media (max-width: 767px) {
+    .editor-styles-wrapper .wp-block-wem-image-text.wem-image-text {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: stretch;
+        gap: 0;
+    }
+    .editor-styles-wrapper .wp-block-wem-image-text.wem-image-text--mobile-image-first {
+        grid-template-areas: "media" "content";
+    }
+    .editor-styles-wrapper .wp-block-wem-image-text.wem-image-text--mobile-content-first {
+        grid-template-areas: "content" "media";
+    }
+    .editor-styles-wrapper .wp-block-wem-image-text .wp-block-wem-image-text-content.wem-image-text__content {
+        margin: 0 !important;
+        padding: 0;
+    }
+
+    /*
+     * In Gutenberg, the child block's outer .block-editor-block-list__block
+     * wrapper is the actual Grid item. Apply responsive margin to that wrapper,
+     * not to the inner saved/edit component root.
+     */
+    .editor-styles-wrapper .wem-image-text--mobile-image-first > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block:nth-child(2) {
+        margin-block-start: var(--wem-it-mobile-text-margin, 16px) !important;
+        margin-block-end: 0 !important;
+    }
+    .editor-styles-wrapper .wem-image-text--mobile-content-first > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block:nth-child(2) {
+        margin-block-start: 0 !important;
+        margin-block-end: var(--wem-it-mobile-text-margin, 16px) !important;
+    }
+}
